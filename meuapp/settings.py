@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'celery',
     'accounts',
+    'legacy',
+
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
