@@ -1,1 +1,1 @@
-Repositório limpo, somente com login/logout/signup
+A Simple Django Stack
