@@ -7,7 +7,8 @@ from celery import Celery
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'meuapp.settings')
 
-app = Celery('meuapp')
+app = Celery('meuapp', broker='pyamqp://guest@localhost//')
+
 # app = Celery('proj', backend='rpc://', broker='pyamqp://')
 
 # Using a string here means the worker doesn't have to serialize

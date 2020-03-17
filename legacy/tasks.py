@@ -1,8 +1,12 @@
-from celery import Celery
+from celery import shared_task
+import pandas as pd
+import pandas.io.sql as sql
 
-app = Celery('tasks', broker='pyamqp://guest@localhost//')
 
+@shared_task
+def task_read():
+    # df = pd.read_csv(
+    #     'videogamesales/relatorio_venda_IDEAL_VIP.csv', encoding='iso8859-15', sep=';')
+    df = pd.read_csv('videogamesales/vgsales.csv')
 
-@app.task
-def add(x, y):
-    return x + y
+    return df
