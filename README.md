@@ -14,17 +14,21 @@ A clean, organized stack for django development.
 # Development
 
 run server<br>
-
-> python manage.py runserver
+```
+python manage.py runserver
+```
 
 RabbitMQ on docker<br>
-
-> sudo docker run -d -p 5672:5672 rabbitmq
+```
+sudo docker run -d -p 5672:5672 rabbitmq
+```
 
 Celery<br>
-
-> celery -A meuapp worker -l info
+```
+celery -A meuapp worker -l info
+```
 
 Flower<br>
-
-> celery -A meuapp flower
+```
+celery -A meuapp flower
+```
