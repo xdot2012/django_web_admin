@@ -8,5 +8,5 @@ import pandas.io.sql as sql
 
 def teste(request):
     df = task_read.delay()
-
+    print(type(df))
     return render(request, "home.html")
