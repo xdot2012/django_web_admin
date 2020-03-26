@@ -4,18 +4,22 @@ from django.db import models
 
 
 class Venda(models.Model):
-
+    # CONSERTAR O IMPORT DUPLICADO!
+    # ACHO QUE A SOLUÇÃO SERÁ FAZER UMA BUSCA NA DATABASE,
+    # CRIAR UM DATASET COM TUDO O QUE JÁ TEM, JUNTAR OS DOIS E
+    # DEPOIS DROPAR AS DUPLICATAS E SALVAR TUDO COM O BULK_CREATE
+    # OU ENTÃO APAGAR TUDO E FODA-SE
+    # EXISTE TAMBÉM O BULK_UPDATE... SEILA!
     rank = models.IntegerField("Rank")
-    name = models.CharField("Name", max_length=30)
-    platform = models.CharField("Platform", max_length=30)
+    name = models.CharField("Name", max_length=300)
+    platform = models.CharField("Platform", max_length=50)
     year = models.IntegerField("Year")
-    genre = models.CharField("Gênero", max_length=30)
+    genre = models.CharField("Gênero", max_length=50)
     publisher = models.CharField("Publisher", max_length=50)
-    na_sales = models.DecimalField("NA Sales", decimal_places=2, max_digits=2)
-    eu_sales = models.DecimalField("EU Sales", decimal_places=2, max_digits=2)
-    jp_sales = models.DecimalField("JP Sales", decimal_places=2, max_digits=2)
-    other_sales = models.DecimalField(
-        "Other Sales", decimal_places=2, max_digits=2)
+    na_sales = models.FloatField("NA Sales")
+    eu_sales = models.FloatField("EU Sales")
+    jp_sales = models.FloatField("JP Sales")
+    other_sales = models.FloatField("Other Sales")
 
     @classmethod
     def get_global_sales(self):
