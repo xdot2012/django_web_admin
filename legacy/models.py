@@ -1,21 +1,20 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 # Create your models here.
 
 
 class Venda(models.Model):
-
     rank = models.IntegerField("Rank")
-    name = models.CharField("Name", max_length=30)
-    platform = models.CharField("Platform", max_length=30)
+    name = models.CharField("Name", max_length=300)
+    platform = models.CharField("Platform", max_length=50)
     year = models.IntegerField("Year")
-    genre = models.CharField("Gênero", max_length=30)
+    genre = models.CharField("Gênero", max_length=50)
     publisher = models.CharField("Publisher", max_length=50)
-    na_sales = models.DecimalField("NA Sales", decimal_places=2, max_digits=2)
-    eu_sales = models.DecimalField("EU Sales", decimal_places=2, max_digits=2)
-    jp_sales = models.DecimalField("JP Sales", decimal_places=2, max_digits=2)
-    other_sales = models.DecimalField(
-        "Other Sales", decimal_places=2, max_digits=2)
+    na_sales = models.FloatField("NA Sales")
+    eu_sales = models.FloatField("EU Sales")
+    jp_sales = models.FloatField("JP Sales")
+    other_sales = models.FloatField("Other Sales")
 
     @classmethod
     def get_global_sales(self):
