@@ -7,7 +7,6 @@ import pandas.io.sql as sql
 
 
 def teste(request):
-    lista = Venda.objects.all()
-    print(len(lista))
+    Venda.objects.all().delete()
     result = task_read.delay()
     return render(request, "home.html")

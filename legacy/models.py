@@ -1,15 +1,10 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 # Create your models here.
 
 
 class Venda(models.Model):
-    # CONSERTAR O IMPORT DUPLICADO!
-    # ACHO QUE A SOLUÇÃO SERÁ FAZER UMA BUSCA NA DATABASE,
-    # CRIAR UM DATASET COM TUDO O QUE JÁ TEM, JUNTAR OS DOIS E
-    # DEPOIS DROPAR AS DUPLICATAS E SALVAR TUDO COM O BULK_CREATE
-    # OU ENTÃO APAGAR TUDO E FODA-SE
-    # EXISTE TAMBÉM O BULK_UPDATE... SEILA!
     rank = models.IntegerField("Rank")
     name = models.CharField("Name", max_length=300)
     platform = models.CharField("Platform", max_length=50)
