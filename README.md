@@ -3,13 +3,7 @@
 A clean, organized stack for django development.
 
 1. Added a simple authentication app<br>
-2. Added Celery/RabbitMQ/Flower to Working Async
-
-(TODO)
-
-- Add Django RESTFRAMEWORK
-- Add REACT
-- Add Redux
+2. Added Celery/RabbitMQ/Flowe
 
 # Development
 
