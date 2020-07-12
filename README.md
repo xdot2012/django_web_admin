@@ -3,7 +3,7 @@
 A clean, organized stack for django development.
 
 1. Added a simple authentication app<br>
-2. Added Celery/RabbitMQ/Flowe
+2. Added Celery/RabbitMQ/Flower
 
 # Development
 
