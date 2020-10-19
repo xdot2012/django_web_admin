@@ -5,5 +5,5 @@ from legacy import views
 
 urlpatterns = [
     path('teste', views.teste, name='teste'),
-    path('', views.home, name='home'),
+    path('', views.HomeView.as_view(), name='home'),
 ]
