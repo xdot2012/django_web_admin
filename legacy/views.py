@@ -9,4 +9,8 @@ import pandas.io.sql as sql
 def teste(request):
     Venda.objects.all().delete()
     result = task_read.delay()
-    return render(request, "home.html")
+    return render(request, "templates/home.html")
+
+
+def home(request):
+    return render(request, "templates/home.html")

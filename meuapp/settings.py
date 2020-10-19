@@ -65,6 +65,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'meuapp/templates'),
             os.path.join(BASE_DIR, 'accounts/templates'),
+            os.path.join(BASE_DIR, 'templates/'),
 
         ],
         'APP_DIRS': True,
@@ -89,7 +90,7 @@ WSGI_APPLICATION = 'meuapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'meuapp',
+        'NAME': 'meu_app',
         'USER': 'postgres',
         'PASSWORD': 'root',
         'HOST': 'localhost',
