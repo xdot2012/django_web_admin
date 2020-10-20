@@ -5,7 +5,7 @@ from simple_history.models import HistoricalRecords
 # Create your models here.
 
 
-class Venda(models.Model):
+class Sale(models.Model):
     rank = models.IntegerField("Rank")
     name = models.CharField("Name", max_length=300)
     platform = models.CharField("Platform", max_length=50)

@@ -1,12 +1,12 @@
 from celery import shared_task
 import pandas as pd
-from legacy.models import Venda
+from legacy.models import Sale
 from celery.schedules import crontab
 
 @shared_task
 def task_read():
     df = pd.read_csv('videogamesales/vgsales.csv', sep=',',  encoding='iso8859-15')
-    vendas_antigas = Venda.objects.all()
+    vendas_antigas = Sale.objects.all()
     vendas_antigas.delete()
 
     df['Name'] = df['Name'].astype('string')
@@ -20,9 +20,9 @@ def task_read():
 
     lista = []
     for x in df.T.to_dict().values():
-        lista.append(Venda(**x))
+        lista.append(Sale(**x))
 
-    Venda.objects.bulk_create(lista)
+    Sale.objects.bulk_create(lista)
     df = df.to_json()
 
     return df
