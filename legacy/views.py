@@ -15,6 +15,7 @@ class HomeView(View):
 def teste(request):
     Sale.objects.all().delete()
     # result = task_read.delay()
-    result = task_read()
-    return render(request, "templates/home.html")
+    df = task_read()
+    Sale.create_from_dataframe(df)
+    return render(request, "templates/home.html", {'data': df.to_json()})
 

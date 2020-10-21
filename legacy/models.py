@@ -4,7 +4,6 @@ from simple_history.models import HistoricalRecords
 
 # Create your models here.
 
-
 class Sale(models.Model):
     rank = models.IntegerField("Rank")
     name = models.CharField("Name", max_length=300)
@@ -28,6 +27,14 @@ class Sale(models.Model):
     def get_global_sales(self):
         global_sales = self.na_sales + self.eu_sales + self.jp_sales + self.other_sales
         return global_sales
+
+    @classmethod
+    def create_from_dataframe(cls, df):
+        my_list = []
+        for x in df.T.to_dict().values():
+            my_list.append(cls(**x))
+        
+        cls.objects.bulk_create(my_list)
 
     def __str__(self):
         return self.name

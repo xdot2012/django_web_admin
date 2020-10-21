@@ -4,8 +4,9 @@ from legacy.models import Sale
 from celery.schedules import crontab
 
 @shared_task
-def task_read():
-    df = pd.read_csv('videogamesales/vgsales.csv', sep=',',  encoding='iso8859-15')
+def task_read(rows=None):
+    df = pd.read_csv('videogamesales/vgsales.csv', sep=',',  encoding='iso8859-15', nrows=rows)
+
     vendas_antigas = Sale.objects.all()
     vendas_antigas.delete()
 
@@ -17,12 +18,5 @@ def task_read():
 
     df = df.drop(columns=['Global_Sales'])
     df.columns = map(str.lower, df.columns)  # TO LOWER
-
-    lista = []
-    for x in df.T.to_dict().values():
-        lista.append(Sale(**x))
-
-    Sale.objects.bulk_create(lista)
-    df = df.to_json()
 
     return df

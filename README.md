@@ -8,12 +8,17 @@ A clean, organized stack for django development.
 4. Added Gunicorn
 
 # To do
+Add wagtail?
 Add docker-compose<br>
 Add adminer<br>
 Add portainer<br>
 Search for FrontEnd options<br>
 Choose a cool template to the project<br>
 Deploy with nginx and Gunicorn(https://docs.gunicorn.org/en/latest/deploy.html)
+
+
+# Cool Packages to test
+easy thumbnails - https://easy-thumbnails.readthedocs.io/en/latest/ref/processors/
 
 # Development
 
