@@ -6,6 +6,7 @@ A clean, organized stack for django development.
 2. Added Celery/RabbitMQ/Flower
 3. Added Django Celery Beat for Handling Periodic Tasks
 4. Added Gunicorn
+5. Added Django Rest Framework
 
 # To do
 Add wagtail?
