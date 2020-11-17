@@ -9,7 +9,17 @@ from django.views import View
 
 class HomeView(View):
     def get(self, request):
-        return render(request, "templates/home.html")
+        context = {}
+        if request.user.is_authenticated:
+
+            df = Sale.get_df()
+            if(not df.empty):
+                df = df.to_html(index=False)
+            context = {
+                'df': df 
+            }
+
+        return render(request, "templates/home.html", context)
 
 
 def teste(request):

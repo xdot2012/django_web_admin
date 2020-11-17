@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'django_extensions',
+    'rest_framework',
     # 'import_export',
     'simple_history',
     'celery',
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
 
 ]
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -150,3 +151,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
