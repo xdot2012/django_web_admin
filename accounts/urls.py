@@ -1,12 +1,12 @@
 # accounts/urls.py
 from django.urls import path, include
 from accounts.views import SignUpView 
-from accounts.apis import UserViewSet 
+from accounts.apis import UsersViewSet 
 from rest_framework import routers
 
 # Api routes
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+router.register(r'users', UsersViewSet)
 
 
 urlpatterns = [

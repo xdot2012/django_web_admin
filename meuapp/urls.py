@@ -10,5 +10,4 @@ urlpatterns = [
 #   User Paths
     path('accounts/', include('accounts.urls')),
     path('', include('legacy.urls')),
-
 ]
