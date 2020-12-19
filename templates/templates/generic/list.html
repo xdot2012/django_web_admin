@@ -1,9 +1,58 @@
 {% extends "templates/admin_layout.html" %}
 {% block page-head %}
-<div class="row">
-    <h1 class="h3 mb-4 text-gray-800"><i class="fa fa-home ml-2 mr-2"></i>GENERIC LIST</h1>
-</div>
+<!--<div class="row">-->
+<!--    <h1 class="h3 mb-4 text-gray-800"><i class="fa fa-home ml-2 mr-2"></i>{{ title }}</h1>-->
+<!--</div>-->
 {% endblock %}
 {% block page-content %}
-{{ object_list }}
+<div class="table-responsive">
+    <div class="row">
+        <div class="col-sm-12 flex-row justify-content-between">
+            <div class="card p-5 mb-4" style="min-height:25rem">
+                <div class="row card-header justify-content-center">
+                    Cadastros Disponíveis
+                </div>
+                <div class="card-body">
+                {% if not object_list %}
+                <div class="row justify-content-center">
+                    <h6>Nenhum Registro Encontrado</h6>
+                </div>
+                {% else %}
+                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                    <thead>
+                        <tr role="row">
+                        {% for column in columns %}
+                            <th>{{ column.attname }}</th>
+                        {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in item_list %}
+                            <tr role="row">
+                                {% for item in row %}
+                                <td>{{ item }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+                <a href="{% url create_url %}">
+                    <button type="button" class="col-md-12 btn btn-primary mt-5">Novo {{ title }}</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra-js %}
+<script>
+// Call the dataTables jQuery plugin
+$(document).ready(function() {
+  $('#dataTable').DataTable();
+});
+</script>
 {% endblock %}

@@ -28,24 +28,22 @@ class Account(models.Model):
     def __str__(self):
         return f'Conta:[{self.number}] - {self.client.name}'
 
-    @property
     def allow_transaction(self, transaction_type, value):
         if transaction_type == 'CR':
             return True
         else:
-            if self.balance + (self.max_limit - self.limit) <= value:
+            if self.balance + (self.max_limit - self.limit) >= value:
                 return True
             else:
                 return False
 
-    @property
     def make_transaction(self, transaction_type, value):
         if transaction_type == 'CR':
             self.balance += value
         else:
             self.balance -= value
             if self.balance < 0:
-                self.limit += self.balance
+                self.limit += self.balance *(-1)
                 self.balance = 0
         self.save()
         return True

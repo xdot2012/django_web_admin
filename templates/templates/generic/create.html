@@ -1,0 +1,36 @@
+{% extends "templates/admin_layout.html" %}
+{% block page-head %}
+<h1 class="h3 mb-4 text-gray-800"><i class="fa fa-plus ml-2 mr-2"></i>Create</h1>
+{% endblock %}
+
+{% block page-content %}
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{% url create_url %}">
+              <div class="modal-body">
+                {% csrf_token %}
+                {{ form }}
+              </div>
+              <div class="modal-footer">
+                <a href="{% url return_url %}">
+                    <button type="button" class="btn btn-default mr-3">Cancelar</button>
+                </a>
+                <button type="submit"  style="width:20rem"  class="btn btn-primary">Criar</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra-js %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+<script>
+// Call the dataTables jQuery plugin
+$(document).ready(function() {
+  $('#dataTable').DataTable();
+});
+</script>
+{% endblock %}
