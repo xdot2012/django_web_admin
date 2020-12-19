@@ -9,5 +9,6 @@ urlpatterns = [
 
 #   User Paths
     path('accounts/', include('accounts.urls')),
+    path('internet_banking/', include('internet_banking.urls')),
     path('', include('legacy.urls')),
 ]

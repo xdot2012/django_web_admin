@@ -49,6 +49,5 @@ class Sale(models.Model):
             df[['name', 'publisher', 'genre']] = df[['name', 'publisher', 'genre']].astype(str)
             df[['rank', 'year']] = df[['rank', 'year']].astype(int)
             df[['na_sales', 'eu_sales', 'jp_sales', 'other_sales']] = df[['na_sales', 'eu_sales', 'jp_sales', 'other_sales']].astype(float).round(2)
-        
         return df
         

@@ -1,25 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from legacy.tasks import task_read
 from legacy.models import Sale
-import pandas as pd
-import pandas.io.sql as sql
-# Create your views here.
-from django.http import HttpResponse
 from django.views import View
+
 
 class HomeView(View):
     def get(self, request):
-        context = {}
         if request.user.is_authenticated:
+            return render(request, "templates/home.html")
 
-            df = Sale.get_df()
-            if(not df.empty):
-                df = df.to_html(index=False)
-            context = {
-                'df': df 
-            }
-
-        return render(request, "templates/home.html", context)
+        else:
+            return redirect(reverse_lazy('login'))
 
 
 def teste(request):

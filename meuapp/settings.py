@@ -42,11 +42,13 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'rest_framework_datatables',
+    'crispy_forms',
     # 'import_export',
     'simple_history',
     'celery',
     'accounts',
     'legacy',
+    'internet_banking',
 
 ]
 
@@ -63,6 +65,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'meuapp.urls'
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 TEMPLATES = [
     {
