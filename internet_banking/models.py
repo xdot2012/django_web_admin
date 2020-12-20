@@ -39,11 +39,17 @@ class Account(models.Model):
 
     def make_transaction(self, transaction_type, value):
         if transaction_type == 'CR':
-            self.balance += value
+            if self.limit == 0:
+                self.balance += value
+            else:
+                self.limit -= value
+                if self.limit < 0:
+                    self.balance += self.limit * (-1)
+                    self.limit = 0
         else:
             self.balance -= value
             if self.balance < 0:
-                self.limit += self.balance *(-1)
+                self.limit += self.balance * (-1)
                 self.balance = 0
         self.save()
         return True
@@ -62,6 +68,8 @@ class Transaction(models.Model):
         if self.account.allow_transaction(self.type, self.value):
             self.approved = True
             self.account.make_transaction(self.type, self.value)
+            self.completed = True
+        else:
             self.completed = True
         return super(Transaction, self).save()
 
