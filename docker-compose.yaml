@@ -18,9 +18,9 @@ services:
     networks:
       - web
       - database
-    depends_on:
+#    depends_on:
       # - mariadb
-#      - postgres
+      # - postgres
 
   nginx:
     image: nginx
