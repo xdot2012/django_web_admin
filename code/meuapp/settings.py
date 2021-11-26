@@ -97,12 +97,8 @@ WSGI_APPLICATION = 'meuapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'meu_app',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'postgres',
-        'PORT': '5432',
     }
 }
 # Password validation
