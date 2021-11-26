@@ -4,7 +4,6 @@ env/
 env/
 venv/
 .idea/
-static_files/
 static/
 
 # Created by https://www.gitignore.io/api/django,python,virtualenv
