@@ -20,7 +20,7 @@ services:
       - database
     depends_on:
       # - mariadb
-      - postgres
+#      - postgres
 
   nginx:
     image: nginx
