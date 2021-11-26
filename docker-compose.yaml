@@ -126,26 +126,26 @@ services:
 #      - web
 #      - database
 
-  adminer:
-    image: adminer
-    container_name: adminer-server
-    restart: always
-    ports:
-      - 8080:8080
-    depends_on:
-      # - mariadb
-      - postgres
-    networks:
-      - database
-
-  portainer:
-    image: portainer/portainer
-    ports:
-      - "9000:9000"
-    command: -H unix:///var/run/docker.sock
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer-data:/data
+#  adminer:
+#    image: adminer
+#    container_name: adminer-server
+#    restart: always
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      # - mariadb
+#      - postgres
+#    networks:
+#      - database
+#
+#  portainer:
+#    image: portainer/portainer
+#    ports:
+#      - "9000:9000"
+#    command: -H unix:///var/run/docker.sock
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - portainer-data:/data
 
 #  django-cron:
 #      build: .
