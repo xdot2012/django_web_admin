@@ -1,0 +1,106 @@
+version: '3.1'
+
+services:
+
+  # mariadb:
+  #   image: mariadb
+  #   container_name: mariadb-server
+  #   restart: always
+  #   expose:
+  #     - 3306
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: proj  # change django database name
+  #   volumes:
+  #     - mariadb-data:/var/lib/mysql
+  #   networks:
+  #     - database
+
+  postgres:
+    image: mdillon/postgis
+    container_name: postgres-server-vup
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: meu_app
+    ports:
+      - 5434:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - web
+      - database
+
+#  redis:
+#    image: redis
+#    container_name: redis-server
+#    expose:
+#      - 6379
+#    networks:
+#      - web
+#      - database
+
+#  celery:
+#    build: .
+#    container_name: celery-server
+#    command: celery -A proj worker --beat --scheduler django_celery_beat.schedulers:DatabaseScheduler # change django celery app name
+#    environment:
+#      - DJANGO_SETTINGS_MODULE=proj.settings_production #change django project name
+#    volumes:
+#      - ./code:/code
+#    depends_on:
+#      - redis
+#    networks:
+#      - web
+#      - database
+#
+#  celery-beat:
+#    build: .
+#    container_name: celery-beat-server
+#    command: celery -A proj beat -l info  # change django celery app name
+#    environment:
+#      - DJANGO_SETTINGS_MODULE=proj.settings_production #change django project name
+#    volumes:
+#      - ./code:/code
+#    depends_on:
+#      - celery
+#    networks:
+#      - web
+#      - database
+#
+#  flower:
+#    build: .
+#    container_name: flower-server
+#    command: celery -A proj flower --basic_auth=admin:"admin" # change django celery app name
+#    environment:
+#      - DJANGO_SETTINGS_MODULE=proj.settings_production #change django project name
+#    volumes:
+#      - ./code:/code
+#    depends_on:
+#      - celery
+#    ports:
+#      - 5555:5555
+#    networks:
+#      - web
+#      - database
+
+#  adminer:
+#    image: adminer
+#    container_name: adminer-server
+#    restart: always
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      # - mariadb
+#      - postgres
+#    networks:
+#      - database
+
+
+volumes:
+  # mariadb-data:
+  postgres-data:
+
+networks: 
+  web:
+  database:
