@@ -69,14 +69,14 @@ services:
       - web
       - database
 
-  redis:
-    image: redis
-    container_name: redis-server
-    expose:
-      - 6379
-    networks:
-      - web
-      - database
+#  redis:
+#    image: redis
+#    container_name: redis-server
+#    expose:
+#      - 6379
+#    networks:
+#      - web
+#      - database
 
 #  celery:
 #    build: .
