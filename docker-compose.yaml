@@ -33,8 +33,7 @@ services:
       - ./log/nginx:/var/log/nginx
       - ./code/media:/var/www/media
       - ./code/static:/var/www/static
-#      - ./var/letsencrypt:/var/letsencrypt
-#      - /etc/letsencrypt:/etc/letsencrypt # comentar se não for utilizar o letsencrypt
+      - ./etc/cert:/etc/openssl/
     networks:
       - web
     depends_on:
