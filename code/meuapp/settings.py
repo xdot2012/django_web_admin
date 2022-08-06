@@ -71,6 +71,8 @@ ROOT_URLCONF = 'meuapp.urls'
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
