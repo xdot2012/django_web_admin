@@ -1,25 +1,6 @@
 # A Simple Django Stack
 
-A clean, organized stack for django development.
-
-1. Added a simple authentication app<br>
-2. Added Celery/RabbitMQ/Flower
-3. Added Django Celery Beat for Handling Periodic Tasks
-4. Added Gunicorn
-5. Added Django Rest Framework
-
-# To do
-Add wagtail?
-Add docker-compose<br>
-Add adminer<br>
-Add portainer<br>
-Search for FrontEnd options<br>
-Choose a cool template to the project<br>
-Deploy with nginx and Gunicorn(https://docs.gunicorn.org/en/latest/deploy.html)
-
-
-# Cool Packages to test
-easy thumbnails - https://easy-thumbnails.readthedocs.io/en/latest/ref/processors/
+A clean, organized django project.
 
 # Development
 
