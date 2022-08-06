@@ -2,6 +2,28 @@
 
 A clean, organized django project.
 
+# Installation
+Pré requisites:
+Python 3.10
+pip3
+virtualenv
+
+Create Virtual Environment
+```
+virtualenv venv
+```
+
+
+Active Virtual Environment
+```
+source venv/bin/activate
+```
+
+```
+pip install code/requirements-txt
+```
+
+
 # Development
 
 run server<br>
