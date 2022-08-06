@@ -1,0 +1,16 @@
+{% extends 'templates/base.html' %}
+{% block content %}
+<body class="bg-gradient-primary">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-10 col-md-10">
+            <div class="card o-hidden border-0 shadow-lg mt-5" style="height:90vh">
+                <div class="card-body p-0">
+                    {% block form_data %} {% endblock form_data %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}
