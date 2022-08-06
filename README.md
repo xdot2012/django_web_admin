@@ -3,10 +3,10 @@
 A clean, organized django project.
 
 # Installation
-Pré requisites:
-Python 3.10
-pip3
-virtualenv
+Pré requisites:<br />
+Python 3.10<br />
+pip3<br />
+virtualenv<br />
 
 Create Virtual Environment
 ```
