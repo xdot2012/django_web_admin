@@ -1,7 +1,8 @@
 # A Simple Django Stack
 
 A clean, organized django project.
-
+<br />
+<img src="./docs/img.png"></img>
 # Installation
 Pré requisites:<br />
 Python 3.10<br />
