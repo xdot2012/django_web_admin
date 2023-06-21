@@ -10,12 +10,12 @@ jobs:
 
     steps:
       - checkout
-      
+
       - run:
           name: Start container and verify it's working
           command: |
             set -x
-            cd ~/django_web_admin/
+            ls
             docker-compose up -d
 
 workflows:
