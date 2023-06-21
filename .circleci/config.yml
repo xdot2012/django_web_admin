@@ -13,7 +13,8 @@ jobs:
           name: Start container and verify it's working
           command: |
             set -x
-            django_web_admin/docker-compose up -d
+            cd ~/django_web_admin/
+            docker-compose up -d
 
 workflows:
   sample:
