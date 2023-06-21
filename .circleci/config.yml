@@ -30,6 +30,8 @@ jobs:
             sudo curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
 
+      - setup_remote_docker
+      
       - run:
           name: Start container and verify it's working
           command: |
