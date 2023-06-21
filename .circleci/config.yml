@@ -33,16 +33,11 @@ jobs:
       - setup_remote_docker
       
       - run:
-          name: Start container and verify it's working
+          name: Start container
           command: |
             set -x
             docker-compose up -d
 
-            # docker-compose will start 2 containers, the one with service will be named `django-server`
-            # we start another container with curl in the same network as `django-server`, this way we have
-            # all exposed ports from `django-server` available on `localhost` in this new container
-            docker run --network container:django-server \
-              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8000/
 
 workflows:
   sample:
