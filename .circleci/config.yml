@@ -11,7 +11,6 @@ jobs:
     steps:
       - checkout
 
-      # This should go into custom primary image, here's only for the sake of explanation
       - run:
           name: Install Docker client
           command: |
@@ -21,14 +20,12 @@ jobs:
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             sudo mv /tmp/docker/* /usr/bin
 
-      # This should go into custom primary image, here's only for the sake of explanation
       - run:
           name: Install Docker Compose
           command: |
             set -x
             sudo chmod 777 /usr/local/bin/docker-compose
             sudo curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-
 
       - setup_remote_docker
       
@@ -38,6 +35,14 @@ jobs:
             set -x
             docker-compose up -d
 
+      - run:
+          name: Execute tests
+          command: |
+            docker exec -it django-server python manage.py test
+
+      - store_artifacts:
+          path: test-reports/
+          destination: django_test_logs
 
 workflows:
   sample:
