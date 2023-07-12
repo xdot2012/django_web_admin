@@ -7,16 +7,17 @@ RUN apt-get -y install libjpeg-dev
 RUN apt-get -y install zlib1g-dev
 RUN apt-get -y install rabbitmq-server
 
-RUN mkdir /code
-WORKDIR /code
-ADD ./code/requirements.txt /code/
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
 RUN pip install ipython
 RUN pip install redis
 RUN pip install celery
 RUN pip install flower
 RUN pip install gunicorn
+
+RUN mkdir /code
+WORKDIR /code
+ADD ./code/requirements.txt /code/
+RUN pip install -r requirements.txt
 
 #
 # RUN apt-get update && apt-get install -y firefox-esr

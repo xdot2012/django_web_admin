@@ -16,11 +16,9 @@ jobs:
           environment:
             DOCKER_VERSION: '23.0.3-ce'
           command: |
-            set -x
-            VER=${DOCKER_VERSION}
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            sudo mv /tmp/docker/* /usr/bin
+            sudo apt update
+            sudo apt install docker-ce docker-ce-cli containerd.io
+            sudo docker --version
 
       - run:
           name: Install Docker Compose
