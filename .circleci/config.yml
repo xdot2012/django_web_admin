@@ -13,13 +13,16 @@ jobs:
             sudo apt-get -y install libjpeg-dev \
             sudo apt-get -y install zlib1g-dev \
             sudo apt-get -y install rabbitmq-server \
-            pip install --upgrade pip \
-            pip install ipython \
-            pip install redis \
-            pip install celery \
-            pip install flower \
-            pip install gunicorn \
+            pip install --upgrade pip ipython redis celery flower gunicorn
             pip install -r code/requirements-dev.txt \
+            pip install -r code/requirements.txt
+      - run:
+          name: install development requirements
+          command: |
+            pip install -r code/requirements-dev.txt
+      - run:
+          name: install requirements
+          command: |
             pip install -r code/requirements.txt
       - run:
           name: run tests
