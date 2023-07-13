@@ -10,10 +10,7 @@ jobs:
           name: install dependencies
           command: |
             sudo apt-get update -y
-            sudo apt-get -y install binutils libproj-dev gdal-bin
-            sudo apt-get -y install libjpeg-dev
-            sudo apt-get -y install zlib1g-dev
-            sudo apt-get -y install rabbitmq-server
+            sudo apt-get -y install binutils libproj-dev gdal-bin libjpeg-dev zlib1g-dev rabbitmq-server
             pip install --upgrade pip ipython redis celery flower gunicorn
       - run:
           name: install development requirements
@@ -25,7 +22,7 @@ jobs:
             pip install -r code/requirements.txt
       - run:
           name: run tests
-          command: python manage.py test
+          command: python code/manage.py test
 
 workflows:
   build-workflow:
