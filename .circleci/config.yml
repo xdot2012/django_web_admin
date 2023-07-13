@@ -19,7 +19,8 @@ jobs:
             pip install celery \
             pip install flower \
             pip install gunicorn \
-            pip install -r code/requirements-dev.txt code/requirements.txt
+            pip install -r code/requirements-dev.txt \
+            pip install -r code/requirements.txt
       - run:
           name: run tests
           command: python manage.py test
