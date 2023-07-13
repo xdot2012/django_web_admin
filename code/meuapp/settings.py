@@ -103,12 +103,8 @@ WSGI_APPLICATION = 'meuapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'meu_app',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'default.sqlite'
     },
     'test': {
         'ENGINE': 'django.db.backends.sqlite3',
