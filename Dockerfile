@@ -14,10 +14,10 @@ RUN pip install celery
 RUN pip install flower
 RUN pip install gunicorn
 
-RUN mkdir /code
-WORKDIR /code
-ADD ./code/requirements.txt /code/
+COPY ./code/ /code/
 RUN pip install -r requirements.txt
+EXPOSE 8000
+CMD ["sh", "run-django.sh"]
 
 #
 # RUN apt-get update && apt-get install -y firefox-esr

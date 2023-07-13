@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django
+          image: xdot2012/circle_ci_python:master
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-srv
+spec:
+  selector:
+    app: django
+  ports:
+    - name: django
+      protocol: TCP
+      port: 8000
+      targetPort: 8000
