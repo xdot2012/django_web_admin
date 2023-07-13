@@ -1,6 +1,5 @@
 from django import forms
 from internet_banking.models import Client, Account, Transaction
-from django_select2 import forms as s2forms
 
 
 class ClientForm(forms.ModelForm):
@@ -12,11 +11,6 @@ class ClientForm(forms.ModelForm):
         fields = '__all__'
 
 
-class ClientWidget(s2forms.ModelSelect2Widget):
-    search_fields = [
-        "name__icontains",
-        "cpf__icontains",
-    ]
 
 class AccountForm(forms.ModelForm):
     number = forms.CharField(widget=forms.TextInput(attrs={'data-mask':"0000 0000 0000 0000"}))
@@ -24,9 +18,6 @@ class AccountForm(forms.ModelForm):
     class Meta:
         model = Account
         exclude = ['limit', 'balance']
-        widgets = {
-            "client": ClientWidget,
-        }
 
 class TransactionForm(forms.ModelForm):
     value = forms.DecimalField(max_digits=6, min_value=0)
