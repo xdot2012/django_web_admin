@@ -15,6 +15,7 @@ RUN pip install flower
 RUN pip install gunicorn
 
 COPY ./code/ /code/
+WORKDIR code/
 RUN pip install -r requirements.txt
 EXPOSE 8000
 CMD ["sh", "run-django.sh"]
