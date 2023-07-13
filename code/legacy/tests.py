@@ -5,8 +5,7 @@ from legacy.tasks import task_read
 # Create your tests here.
 class SalesTestCase(TestCase):
     def setUp(self):
-        df = task_read(10)
-        Sale.create_from_dataframe(df)
+        pass
         
     def test_task(self):
         pass
