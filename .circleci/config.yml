@@ -37,7 +37,7 @@ jobs:
             DOCKERHUB_PASSWORD: 'OnePiece123'
             DOCKERHUB_USERNAME: 'xdot2012'
           command:
-            echo "${DOCKERHUB_PASSWORD}" | docker login --username ${DOCKERHUB_USERNAME} --password-stdin
+            echo "$DOCKERHUB_PASSWORD" | docker login --username $DOCKERHUB_USERNAME --password-stdin
       - run: docker build -t xdot2012/circle_ci_python:$CIRCLE_BRANCH .
       - run: docker push xdot2012/circle_ci_python:$CIRCLE_BRANCH
 
