@@ -9,13 +9,12 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            sudo apt-get -y install binutils libproj-dev gdal-bin \
-            sudo apt-get -y install libjpeg-dev \
-            sudo apt-get -y install zlib1g-dev \
-            sudo apt-get -y install rabbitmq-server \
+            sudo apt-get update -y
+            sudo apt-get -y install binutils libproj-dev gdal-bin
+            sudo apt-get -y install libjpeg-dev
+            sudo apt-get -y install zlib1g-dev
+            sudo apt-get -y install rabbitmq-server
             pip install --upgrade pip ipython redis celery flower gunicorn
-            pip install -r code/requirements-dev.txt \
-            pip install -r code/requirements.txt
       - run:
           name: install development requirements
           command: |
