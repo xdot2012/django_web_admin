@@ -4,9 +4,6 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.10.1
-    environment:
-      DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
-      DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
     steps:
       - checkout
       - run:
@@ -28,11 +25,11 @@ jobs:
           command: python code/manage.py test
   build:
     docker:
-      - image: cimg/base:2023.07
-    parallelism: 4
+      - image: cimg/aws:2023.07
     environment:
       ENV_FILE: code/meuapp/.env
-
+      AWS_CONF_FOLDER: ~/.aws/
+      AWS_CONF_FILE: ~/.aws/credentials
     steps:
       - checkout
       - setup_remote_docker:
@@ -45,6 +42,18 @@ jobs:
             echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID | cat >> $ENV_FILE
             echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY | cat >> $ENV_FILE
             echo AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME | cat >> $ENV_FILE
+      - run:
+          name: configure aws cli
+          command: |
+            mkdir $AWS_CONF_FOLDER
+            echo [default] | cat >> $ENV_FILE
+            echo aws_access_key_id = $AWS_ACCESS_KEY_ID | cat >> $ENV_FILE
+            echo aws_secret_access_key = $AWS_SECRET_ACCESS_KEY | cat >> $ENV_FILE
+      - run:
+          name: collect static files
+          command: |
+            python code/manage.py collectstatic --no-input
+            aws s3 sync code/static/ s3://$AWS_STORAGE_BUCKET_NAME/static/
       - run:
           name: authenticate to dockerhub
           command: echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
