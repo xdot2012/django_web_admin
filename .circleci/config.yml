@@ -29,7 +29,7 @@ jobs:
       - run:
           name: uninstall development requirements
           command: |
-            pip uninstall -r code/requirements-dev.txt
+            pip uninstall -r code/requirements-dev.txt -y
       - run:
           name: collect static files
           command: |
