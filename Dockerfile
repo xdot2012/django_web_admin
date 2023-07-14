@@ -10,17 +10,13 @@ RUN apt-get -y install rabbitmq-server
 RUN pip install --upgrade pip
 RUN pip install ipython redis celery flower gunicorn
 
-COPY ./code/ /code/
+COPY ./code/requirements.txt /code/requirements.txt
 WORKDIR code/
 RUN pip install -r requirements.txt
+
+COPY ./code .
+RUN python manage.py collectstatic --noinput
+RUN python manage.py migrate --noinput
+
 EXPOSE 8000
 CMD ["sh", "run-django.sh"]
-
-#
-# RUN apt-get update && apt-get install -y firefox-esr
-# RUN apt-get install -y xvfb xserver-xephyr xfonts-base
-#
-# RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
-# RUN tar -x geckodriver -zf geckodriver-v0.26.0-linux64.tar.gz -O > /usr/bin/geckodriver
-# RUN chmod +x /usr/bin/geckodriver
-# RUN rm geckodriver-v0.26.0-linux64.tar.gz

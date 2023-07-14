@@ -2,7 +2,17 @@ apiVersion: skaffold/v4beta6
 kind: Config
 metadata:
   name: django-web-admin
+build:
+  local:
+    push: false
+  artifacts:
+    - image: xdot2012/circle_ci_python
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'code/**/*.py'
+            dest: .
 manifests:
   rawYaml:
-    - infra/k8s/django.yaml
-    - infra/k8s/ingress-srv.yaml
+    - infra/k8s/*
