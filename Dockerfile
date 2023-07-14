@@ -1,24 +1,20 @@
 FROM python:3.10
-# ENV PYTHONUNBUFFERED 1
-# RUN apt-get update -y
-#
-# RUN apt-get -y install binutils libproj-dev gdal-bin
-# RUN apt-get -y install libjpeg-dev
-# RUN apt-get -y install zlib1g-dev
-# RUN apt-get -y install rabbitmq-server
-#
-# RUN pip install --upgrade pip
-# RUN pip install ipython
-# RUN pip install redis
-# RUN pip install celery
-# RUN pip install flower
-# RUN pip install gunicorn
+ENV PYTHONUNBUFFERED 1
+RUN apt-get update -y
+
+RUN apt-get -y install binutils libproj-dev gdal-bin
+RUN apt-get -y install libjpeg-dev
+RUN apt-get -y install zlib1g-dev
+RUN apt-get -y install rabbitmq-server
+
+RUN pip install --upgrade pip
+RUN pip install ipython redis celery flower gunicorn
 
 COPY ./code/ /code/
 WORKDIR code/
-# RUN pip install -r requirements.txt
-EXPOSE 8000
-CMD ["sh", "run-django.sh"]
+RUN pip install -r requirements.txt
+RUN python manage.py collectstatic
+
 
 #
 # RUN apt-get update && apt-get install -y firefox-esr
