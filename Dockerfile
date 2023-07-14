@@ -10,11 +10,11 @@ RUN apt-get -y install rabbitmq-server
 RUN pip install --upgrade pip
 RUN pip install ipython redis celery flower gunicorn
 
-COPY . /code/
+COPY ./code/ /code/
 WORKDIR code/
 RUN pip install -r requirements.txt
-RUN python manage.py collectstatic
-
+EXPOSE 8000
+CMD ["sh", "run-django.sh"]
 
 #
 # RUN apt-get update && apt-get install -y firefox-esr

@@ -2,9 +2,6 @@ apiVersion: skaffold/v4beta6
 kind: Config
 metadata:
   name: django-web-admin
-build:
-  artifacts:
-    - image: xdot2012/circle_ci_python
 manifests:
   rawYaml:
     - infra/k8s/django.yaml

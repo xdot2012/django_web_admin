@@ -30,9 +30,7 @@ jobs:
           version: 20.10.24
           docker_layer_caching: true
       - run: echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-      - run: |
-          cd code/
-          docker build -t xdot2012/circle_ci_python:$CIRCLE_BRANCH .
+      - run: docker build -t xdot2012/circle_ci_python:$CIRCLE_BRANCH .
       - run: docker push xdot2012/circle_ci_python:$CIRCLE_BRANCH
 
 workflows:
