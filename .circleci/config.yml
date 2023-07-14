@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  test-and-build:
+  test:
     docker:
       - image: cimg/python:3.10.1
     environment:
@@ -26,9 +26,24 @@ jobs:
       - run:
           name: run tests
           command: python code/manage.py test
+  build:
+    docker:
+      - image: cimg/python:3.10.1
+    environment:
+      DOCKERHUB_PASSWORD: 'OnePiece123#'
+      DOCKERHUB_USERNAME: 'xdot2012'
+      USE_S3: $USE_S3
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      AWS_STORAGE_BUCKET_NAME: $AWS_STORAGE_BUCKET_NAME
+
+    steps:
+      - checkout
       - setup_remote_docker:
           version: 20.10.24
           docker_layer_caching: true
+      - run: |
+          echo "$ENV_VARIABLE_NAME" > filename.txt
       - run: echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
       - run: docker build -t xdot2012/circle_ci_python:$CIRCLE_BRANCH .
       - run: docker push xdot2012/circle_ci_python:$CIRCLE_BRANCH
@@ -36,4 +51,7 @@ jobs:
 workflows:
   build-workflow:
     jobs:
-      - test-and-build
+      - test
+      - build:
+          requires:
+            - test
