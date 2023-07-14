@@ -28,10 +28,9 @@ jobs:
           command: python code/manage.py test
   build:
     docker:
-      - image: cimg/python:3.10.1
+      - image: cimg/base:2023.07
+    parallelism: 4
     environment:
-      DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
-      DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
       ENV_FILE: code/meuapp/.env
 
     steps:
