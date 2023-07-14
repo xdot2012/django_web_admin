@@ -5,8 +5,8 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
     environment:
-      DOCKERHUB_PASSWORD: 'OnePiece123#'
-      DOCKERHUB_USERNAME: 'xdot2012'
+      DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
+      DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
     steps:
       - checkout
       - run:
@@ -30,23 +30,31 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
     environment:
-      DOCKERHUB_PASSWORD: 'OnePiece123#'
-      DOCKERHUB_USERNAME: 'xdot2012'
-      USE_S3: $USE_S3
-      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-      AWS_STORAGE_BUCKET_NAME: $AWS_STORAGE_BUCKET_NAME
+      DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
+      DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
+      ENV_FILE: code/meuapp/.env
 
     steps:
       - checkout
       - setup_remote_docker:
           version: 20.10.24
           docker_layer_caching: true
-      - run: |
-          echo "$ENV_VARIABLE_NAME" > filename.txt
-      - run: echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
-      - run: docker build -t xdot2012/circle_ci_python:$CIRCLE_BRANCH .
-      - run: docker push xdot2012/circle_ci_python:$CIRCLE_BRANCH
+      - run:
+          name: setup environment variables
+          command: |
+            echo USE_S3=$USE_S3 | cat >> $ENV_FILE
+            echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID | cat >> $ENV_FILE
+            echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY | cat >> $ENV_FILE
+            echo AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME | cat >> $ENV_FILE
+      - run:
+          name: authenticate to dockerhub
+          command: echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      - run:
+          name: build docker image
+          command: docker build -t xdot2012/circle_ci_python:$CIRCLE_BRANCH .
+      - run:
+          name: push docker image
+          command: docker push xdot2012/circle_ci_python:$CIRCLE_BRANCH
 
 workflows:
   build-workflow:
