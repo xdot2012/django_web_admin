@@ -30,6 +30,10 @@ jobs:
           name: uninstall development requirements
           command: |
             pip uninstall -r code/requirements-dev.txt
+      - run:
+          name: collect static files
+          command: |
+            python code/manage.py collectstatic
       - setup_remote_docker:
           version: 20.10.24
           docker_layer_caching: true
