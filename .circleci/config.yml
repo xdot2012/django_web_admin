@@ -1,9 +1,11 @@
 version: 2.1
 
 jobs:
-  test:
+  test_and_build:
     docker:
       - image: cimg/python:3.10.1
+    environment:
+      ENV_FILE: code/meuapp/.env
     steps:
       - checkout
       - run:
@@ -23,16 +25,6 @@ jobs:
       - run:
           name: run tests
           command: python code/manage.py test
-  build:
-    docker:
-      - image: cimg/aws:2023.07
-    environment:
-      ENV_FILE: code/meuapp/.env
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 20.10.24
-          docker_layer_caching: true
       - run:
           name: setup environment variables
           command: |
@@ -40,6 +32,12 @@ jobs:
             echo AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID | cat >> $ENV_FILE
             echo AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY | cat >> $ENV_FILE
             echo AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME | cat >> $ENV_FILE
+      - run:
+          name: install aws cli
+          command:
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
       - run:
           name: configure aws cli
           command: |
@@ -50,6 +48,9 @@ jobs:
           command: |
             python code/manage.py collectstatic --no-input
             aws s3 sync code/static/ s3://$AWS_STORAGE_BUCKET_NAME/static/
+      - setup_remote_docker:
+          version: 20.10.24
+          docker_layer_caching: true
       - run:
           name: authenticate to dockerhub
           command: echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
@@ -63,7 +64,4 @@ jobs:
 workflows:
   build-workflow:
     jobs:
-      - test
-      - build:
-          requires:
-            - test
+      - test_and_build
