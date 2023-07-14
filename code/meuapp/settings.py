@@ -175,13 +175,16 @@ STATICFILES_DIRS = (
 
 if USE_S3 := env.bool('USE_S3', False):
     # aws settings
+    AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 else:
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

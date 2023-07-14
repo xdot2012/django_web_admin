@@ -28,8 +28,6 @@ jobs:
       - image: cimg/aws:2023.07
     environment:
       ENV_FILE: code/meuapp/.env
-      AWS_CONF_FOLDER: ~/.aws/
-      AWS_CONF_FILE: ~/.aws/credentials
     steps:
       - checkout
       - setup_remote_docker:
@@ -45,10 +43,8 @@ jobs:
       - run:
           name: configure aws cli
           command: |
-            mkdir $AWS_CONF_FOLDER
-            echo [default] | cat >> $ENV_FILE
-            echo aws_access_key_id = $AWS_ACCESS_KEY_ID | cat >> $ENV_FILE
-            echo aws_secret_access_key = $AWS_SECRET_ACCESS_KEY | cat >> $ENV_FILE
+            aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+            aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
       - run:
           name: collect static files
           command: |
