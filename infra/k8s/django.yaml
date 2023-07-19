@@ -15,6 +15,11 @@ spec:
       containers:
         - name: django
           image: xdot2012/circle_ci_python:master
+          envFrom:
+            - secretRef:
+                name: secrets
+#            - configMapRef:
+#                name: config
 ---
 apiVersion: v1
 kind: Service

@@ -12,10 +12,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 
 import os
-import environ
-
-env = environ.Env()
-environ.Env.read_env()
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
@@ -29,10 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l^felnuw#jt=na(u^mji^x4_ex$#4t&s@ip7vn5@h_c!blv&i-'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', True)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -109,11 +105,11 @@ WSGI_APPLICATION = 'meuapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'default.sqlite'
+        'NAME': f"{os.getenv('DATABASE_NAME', 'default')}.sqlite"
     },
     'test': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'test_database.sqlite'
+        'NAME': "test.sqlite"
     },
 }
 # Password validation
@@ -173,14 +169,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, './static_files'),
 )
 
-if USE_S3 := env.bool('USE_S3', False):
-    # aws settings
-    AWS_ACCESS_KEY_ID = env.str('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = env.str('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+if USE_S3 := os.getenv('STATIC_ACCESS_KEY_ID', False):
+    AWS_ACCESS_KEY_ID = os.getenv('STATIC_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = os.getenv('STATIC_SECRET_KEY', '')
+    AWS_STORAGE_BUCKET_NAME = os.getenv('STATIC_BUCKET_NAME', '')
+    STATIC_URL = os.getenv('STATIC_ENDPOINT_URL', '')
 else:
     STATIC_URL = '/static/'
 
